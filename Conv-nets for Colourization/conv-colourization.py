@@ -600,7 +600,6 @@ def train(args, cnn=None):
     
     return cnn
 
-"""## Convolutional neural networks (your code goes here)"""
 
 ######################################################################
 # MODELS
@@ -640,7 +639,6 @@ class CNN(nn.Module):
         super(CNN, self).__init__()
         padding = kernel // 2
 
-        ############### YOUR CODE GOES HERE ###############
         self.downconv1 = nn.Sequential(
         MyConv2d(1, num_filters, kernel_size=kernel, padding=padding),
         nn.BatchNorm2d(num_filters),
@@ -686,7 +684,6 @@ class UNet(nn.Module):
     def __init__(self, kernel, num_filters, num_colours, num_in_channels):
         super(UNet, self).__init__()
 
-        ############### YOUR CODE GOES HERE ############### 
         padding = kernel // 2
         
         self.downconv1 = nn.Sequential(
@@ -723,7 +720,7 @@ class UNet(nn.Module):
         ###################################################
 
     def forward(self, x):
-        ############### YOUR CODE GOES HERE ###############
+
         self.out1 = self.downconv1(x)
         self.out2 = self.downconv2(self.out1)
         self.out3 = self.rfconv(self.out2)
@@ -731,7 +728,6 @@ class UNet(nn.Module):
         self.out5 = self.upconv2(torch.cat((self.out4, self.out1), 1))
         self.out_final = self.finalconv(torch.cat((self.out5, x), 1))
         return self.out_final
-        ###################################################
         pass
 
 """# CIFAR-10 colorization
