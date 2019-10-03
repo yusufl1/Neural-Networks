@@ -440,10 +440,6 @@ class DCGenerator(nn.Module):
         super(DCGenerator, self).__init__()
 
         self.conv_dim = conv_dim
-        ###########################################
-        ##   FILL THIS IN: CREATE ARCHITECTURE   ##
-        ###########################################
-
         self.linear_bn = upconv(100, 128, 3)
         self.upconv1 = upconv(128, 8*8, 5)
         self.upconv2 = upconv(8*8, 32, 5)
@@ -480,10 +476,6 @@ class DCDiscriminator(nn.Module):
     """
     def __init__(self, conv_dim=64):
         super(DCDiscriminator, self).__init__()
-
-        ###########################################
-        ##   FILL THIS IN: CREATE ARCHITECTURE   ##
-        ###########################################
 
         self.conv1 = conv(3, 64, 5)
         self.conv2 = conv(64 , 64 , 5)
@@ -619,10 +611,6 @@ class CycleGenerator(nn.Module):
     def __init__(self, conv_dim=64, init_zero_weights=False):
         super(CycleGenerator, self).__init__()
 
-        ###########################################
-        ##   FILL THIS IN: CREATE ARCHITECTURE   ##
-        ###########################################
-
         # 1. Define the encoder part of the generator (that extracts features from the input image)
         self.conv1 = conv(3, 32, 5)
         self.conv2 = conv(32, 64, 5)
@@ -713,9 +701,6 @@ def cyclegan_training_loop(dataloader_X, dataloader_Y, test_dataloader_X, test_d
           #            TRAIN THE DISCRIMINATORS
           # ============================================
 
-          #########################################
-          ##             FILL THIS IN            ##
-          #########################################
 
           # Train with real images
           d_optimizer.zero_grad()
@@ -754,9 +739,6 @@ def cyclegan_training_loop(dataloader_X, dataloader_Y, test_dataloader_X, test_d
           # =========================================
 
 
-          #########################################
-          ##    FILL THIS IN: Y--X-->Y CYCLE     ##
-          #########################################
           g_optimizer.zero_grad()
 
           # 1. Generate fake images that look like domain X based on real images in domain Y
@@ -767,11 +749,7 @@ def cyclegan_training_loop(dataloader_X, dataloader_Y, test_dataloader_X, test_d
 
           reconstructed_Y = G_XtoY(fake_X)
           # 3. Compute the cycle consistency loss (the reconstruction loss)
-#          a = images_Y - G_XtoY(fake_X)
- #         b = np.linalg.norm(a.cpu().detach(), ord=1)
-  #        print(b)
-   #       c = sum(b)
-    #      d = c / fake_X.size(0)
+
           total = 0
           reconstructed = G_XtoY(fake_X)
           loser = nn.L1Loss()
@@ -783,12 +761,6 @@ def cyclegan_training_loop(dataloader_X, dataloader_Y, test_dataloader_X, test_d
           
           g_loss.backward()
           g_optimizer.step()
-
-
-
-          #########################################
-          ##    FILL THIS IN: X--Y-->X CYCLE     ##
-          #########################################
 
           g_optimizer.zero_grad()
 
