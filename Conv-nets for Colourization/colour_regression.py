@@ -19,9 +19,7 @@ It can take up to a couple of minutes to download everything the first time.
 
 All files are stored at /content/csc421/a2/data/ folder
 
-## Helper code
-You can ignore the restart warning.
-"""
+
 
 ######################################################################
 # Setup python environment and change the current working directory
