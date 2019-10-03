@@ -597,9 +597,7 @@ class MyGRUCell(nn.Module):
         self.input_size = input_size
         self.hidden_size = hidden_size
 
-        # ------------
-        # FILL THIS IN
-        # ------------
+
         ## Input linear layers
         self.Wiz = nn.Linear(self.input_size, self.hidden_size)
         self.Wir = nn.Linear(self.input_size, self.hidden_size)
@@ -628,9 +626,7 @@ class MyGRUCell(nn.Module):
             h_new: batch_size x hidden_size
         """
 
-        # ------------
-        # FILL THIS IN
-        # ------------
+
         
         z = F.sigmoid(self.Wiz(x).cuda() + self.Whz(h_prev).cuda())
         r = F.sigmoid(self.Wir(x) + self.Whr(h_prev))
@@ -759,10 +755,6 @@ class AdditiveAttention(nn.Module):
 
             The attention_weights must be a softmax weighting over the seq_len annotations.
         """
-
-        # ------------
-        # FILL THIS IN
-        # ------------
         
         batch_size = queries.shape[0]
 
@@ -807,9 +799,7 @@ class ScaledDotAttention(nn.Module):
             The output must be a softmax weighting over the seq_len annotations.
         """
 
-        # ------------
-        # FILL THIS IN
-        # ------------
+
         batch_size = queries.shape[0]
         q = self.Q(queries)
         
@@ -916,9 +906,6 @@ class RNNAttentionDecoder(nn.Module):
         
         for i in range(seq_len):
 
-            # ------------
-            # FILL THIS IN
-            # ------------
             embed_current = embed[:, i, :].squeeze(1)    
             context, attention_weights = self.attention(h_prev, annotations, annotations)
 
@@ -979,9 +966,7 @@ class TransformerDecoder(nn.Module):
         self_attention_weights_list = []
         contexts = embed
         for i in range(self.num_layers):
-          # ------------
-          # FILL THIS IN
-          # ------------
+
           new_contexts, self_attention_weights = self.self_attentions[i](embed, annotations, annotations)
           residual_contexts = new_contexts + embed
           new_contexts, encoder_attention_weights = self.encoder_attentions[i](residual_contexts, annotations, annotations)
