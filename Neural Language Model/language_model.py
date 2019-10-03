@@ -182,10 +182,8 @@ class Model(object):
             expanded_target_batch - each row is the indicator vector for a target word,
                 i.e. the (i, j) entry is 1 if the i'th word is j, and 0 otherwise."""
 
-        ###########################   YOUR CODE HERE  ##############################
         return output_activations - expanded_target_batch
 
-        ############################################################################
 
 
     def compute_loss(self, output_activations, expanded_target_batch):
@@ -251,15 +249,11 @@ class Model(object):
         hid_deriv = np.dot(loss_derivative, self.params.hid_to_output_weights) \
                     * activations.hidden_layer * (1. - activations.hidden_layer)
 
-
-        ###########################   YOUR CODE HERE  ##############################
         hid_to_output_weights_grad = np.dot(np.transpose(loss_derivative), activations.hidden_layer)
         output_bias_grad = (loss_derivative.T).dot(np.ones(loss_derivative.shape[0]))
         embed_to_hid_weights_grad = np.dot(np.transpose(hid_deriv), activations.embedding_layer)
         hid_bias_grad = (hid_deriv.T).dot(np.ones((hid_deriv.shape[0])))
 
-
-        ############################################################################
 
 
         # The matrix of derivatives for the embedding layer
